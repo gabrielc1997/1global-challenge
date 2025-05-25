@@ -5,6 +5,6 @@ export const store = configureStore({
   },
 });
 
-// Tipagem para usar no useSelector e no useDispatch
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
