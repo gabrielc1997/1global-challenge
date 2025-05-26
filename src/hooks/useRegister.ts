@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { register } from '@/features/auth/authService';
-import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { useAppDispatch } from './useAppDispatch';
 import { loginSuccess } from '@/features/auth/authSlice';
 import { useRouter } from 'next/router';
 
@@ -11,9 +11,10 @@ export const useRegister = () => {
   return useMutation({
     mutationFn: ({ email, password }: { email: string; password: string }) =>
       register(email, password),
-    onSuccess: (token) => {
-      localStorage.setItem('token', token);
-      dispatch(loginSuccess(token));
+    onSuccess: (token, { email }) => {
+      const user = { email, token };
+      dispatch(loginSuccess(user));
+      localStorage.setItem('user', JSON.stringify(user));
       router.push('/welcome');
     },
   });
