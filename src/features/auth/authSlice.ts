@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface User {
+export interface User {
   id: string;
   name: string;
   email: string;
@@ -24,6 +24,7 @@ const authSlice = createSlice({
     },
     logout: (state) => {
       state.user = null;
+      localStorage.removeItem('user');
     },
   },
 });
