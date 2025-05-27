@@ -85,31 +85,35 @@ export default function BackOfficeUserFormPanel({ userId, onClose }: Props) {
           {...register('first_name')}
           error={!!errors.first_name}
           helperText={errors.first_name?.message}
+          data-testid="first_name"
         />
         <TextField
           label="Last Name"
           {...register('last_name')}
           error={!!errors.last_name}
           helperText={errors.last_name?.message}
+          data-testid="last_name"
         />
         <TextField
           label="Email"
           {...register('email')}
           error={!!errors.email}
           helperText={errors.email?.message}
+          data-testid="email"
         />
         <TextField
           label="Avatar URL"
           {...register('avatar')}
           error={!!errors.avatar}
           helperText={errors.avatar?.message}
+          data-testid="avatar"
         />
 
         <Stack direction="row" spacing={2} justifyContent="flex-end" mt={2}>
           <Button variant="outlined" onClick={onClose} disabled={isSubmitting}>
             Cancel
           </Button>
-          <Button type="submit" variant="contained" disabled={isSubmitting}>
+          <Button type="submit" data-testid="save" variant="contained" disabled={isSubmitting}>
             {isEditMode ? 'Save' : 'Create'}
           </Button>
         </Stack>
