@@ -1,0 +1,12 @@
+node_modules
+.next
+storybook-static
+cypress
+*.log
+.git
+.vscode
+*.md
+*.test.ts
+*.test.tsx
+*.cy.ts
+coverage

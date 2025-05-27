@@ -7,6 +7,8 @@ export default function PrimaryButton(props: ButtonProps) {
       variant="contained"
       sx={{ mt: 3, py: 1.5 }}
       {...props}
-    />
+    >
+    {props.children}
+    </Button>
   );
 }

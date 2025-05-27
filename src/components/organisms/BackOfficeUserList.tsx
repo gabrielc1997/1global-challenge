@@ -187,6 +187,7 @@ const BackOfficeUserList = ({ itemsPerPage, onEdit, onAdd }: Props) => {
             color="primary"
             startIcon={<Add />}
             onClick={onAdd}
+            data-testid="add"
           >
             Add User
           </Button>
@@ -212,12 +213,13 @@ const BackOfficeUserList = ({ itemsPerPage, onEdit, onAdd }: Props) => {
                 <TableCell>{`${user.first_name} ${user.last_name}`}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell align="right">
-                  <IconButton color="primary" onClick={() => onEdit(user.id)}>
+                  <IconButton color="primary" data-testid="edit" onClick={() => onEdit(user.id)}>
                     <Edit />
                   </IconButton>
                   <IconButton
                     color="error"
                     onClick={() => handleRequestDelete(user)}
+                    data-testid="delete"
                   >
                     <Delete />
                   </IconButton>
@@ -253,7 +255,7 @@ const BackOfficeUserList = ({ itemsPerPage, onEdit, onAdd }: Props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancelDelete}>Cancel</Button>
-          <Button onClick={handleConfirmDelete} color="error" variant="contained">
+          <Button onClick={handleConfirmDelete} data-testid="confirm" color="error" variant="contained">
             Delete
           </Button>
         </DialogActions>

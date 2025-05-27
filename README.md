@@ -1,36 +1,149 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+UserManagement Documentation
 
-## Getting Started
+Overview
 
-First, run the development server:
+UserManagement is a CRUD-based user listing application with login functionality, built using Next.js and following the Atomic Design methodology. It includes user authentication, user management (create, update, delete), theme switching (light/dark), and integration with a mock API.
 
-```bash
+Technologies Used
+
+Next.js 15 (with Turbopack)
+
+React 19
+
+TypeScript
+
+Redux Toolkit and React Redux
+
+React Hook Form with Zod for schema validation
+
+Material UI (MUI) and styled-components for styling
+
+Framer Motion for animations
+
+React Query (TanStack Query)
+
+Axios for API requests
+
+Cypress, Playwright, and Vitest for testing
+
+Project Structure
+
+src/
+├── components/
+│   ├── atoms/             # Basic UI elements
+│   ├── molecules/         # Combinations of atoms
+│   ├── organisms/         # Complex UI components
+│   └── templates/         # Page-level layouts
+├── context/               # Theme context provider
+├── features/              # Redux slices, services, and types
+├── hooks/                 # Custom React hooks
+├── lib/                   # Utility libraries (if any)
+├── pages/                 # Next.js pages and API routes
+├── store/                 # Redux store configuration
+├── styles/                # Global CSS styles
+├── theme/                 # Theme definitions (light/dark)
+
+Authentication
+
+Login and registration are available at /login
+
+Tokens are persisted in localStorage
+
+Redux manages the authentication state and session persistence
+
+User Management Features
+
+User listing interface
+
+User creation form
+
+User editing and deletion
+
+Form validation using Zod integrated with React Hook Form
+
+Real-time updates on the user list
+
+Theme System
+
+Toggle between Light and Dark modes
+
+Managed via ThemeContext
+
+Defined in lightTheme.ts and darkTheme.ts files
+
+Testing
+
+Cypress for end-to-end tests (located in cypress/e2e)
+
+Vitest for unit and integration testing
+
+Playwright for browser automation testing
+
+Example test commands:
+
+npx cypress open       # Launches Cypress UI
+dev vitest             # Runs Vitest tests
+npx playwright test    # Executes Playwright tests
+
+Getting Started
+
+Prerequisites
+
+Node.js v18 or higher
+
+Docker (optional)
+
+Local Development
+
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Application will be available at: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Docker
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+docker build -t usermanagement .
+docker run -p 3000:3000 usermanagement
 
-## Learn More
+Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+Create a .env.local file at the root with the following content:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+NEXT_PUBLIC_API_URL=https://reqres.in/api
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Configuration Highlights
 
-## Deploy on Vercel
+Alias @/* maps to src/* in tsconfig.json
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Custom build settings in next.config.ts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ESLint configuration in eslint.config.mjs
+
+Dockerfile provided for containerization
+
+Commit Standards and CI/CD
+
+Follows Conventional Commits (e.g., feat:, fix:)
+
+Ready for integration with continuous integration/continuous deployment pipelines
+
+Scripts
+
+"dev": "next dev --turbopack",
+"build": "next build",
+"start": "next start",
+"lint": "next lint"
+
+Future Improvements
+
+Role-based access control (RBAC)
+
+Pagination in user listings
+
+Forgot password and password reset flows
+
+Enhanced test coverage and edge case handling
+
+Author
+
+Gabriel Santos Carvalho

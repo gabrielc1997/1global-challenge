@@ -1,6 +1,6 @@
-import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
-const darkTheme = extendTheme({
+const darkTheme = createTheme({
   colorSchemes: {
     dark: {
       palette: {
