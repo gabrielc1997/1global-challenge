@@ -157,10 +157,6 @@ NEXT_PUBLIC_API_URL=https://reqres.in/api
 
 ## Author
 
-Gabriel Santos
+Gabriel Santos Carvalho
 
----
 
-## License
-
-MIT License (consider adding a LICENSE file if not yet included)
