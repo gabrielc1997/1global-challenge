@@ -1,41 +1,66 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  fetchBackOfficeUsers,
+  fetchBackOfficeUserById,
+  createBackOfficeUser,
+  updateBackOfficeUser,
+  deleteBackOfficeUser,
+} from './api';
+import { BackOfficeUserRequest } from './types';
 
-export interface BackOfficeUser {
-	id: number;
-	email: string;
-	avatar: string;
-	first_name: string;
-	last_name: string;
-}
 
-export interface BackOfficeUserRequest {
-	id?: number;
-	email: string;
-	avatar?: string;
-	first_name: string;
-	last_name: string;
-}
+export const useBackOfficeUsers = (page: number, perPage: number) => {
+  return useQuery({
+    queryKey: ['backofficeUsers', page],
+    queryFn: () => fetchBackOfficeUsers(page, perPage),
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+  });
+};
 
-const API_URL = "https://reqres.in/api/users";
+export const useBackOfficeUserById = (id: number | null) => {
+  return useQuery({
+    queryKey: ['backOfficeUser', id],
+    queryFn: async () => {
+      if (id === null) throw new Error('User ID is null');
+      const response = await fetchBackOfficeUserById(id);
 
-const api = axios.create({
-	baseURL: API_URL,
-	headers: {
-		accept: "application/json",
-		"x-api-key": "reqres-free-v1",
-	},
-});
+      return response;
+    },
+    enabled: id !== null,
+  });
+};
 
-export const useBackOfficeUsers = (page = 1, limit = 6) => {
-	return useQuery({
-		queryKey: ["backOfficeUsers", page],
-		queryFn: async () => {
-			const response = await api.get("", {
-				params: { page, per_page: limit },
-			});
-			return response.data;
-		},
-		placeholderData: (prevData) => prevData,
-	});
+export const useCreateBackOfficeUser = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: createBackOfficeUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['backofficeUsers'] });
+    },
+  });
+};
+
+export const useUpdateBackOfficeUser = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, data }: { id: number; data: BackOfficeUserRequest }) =>
+      updateBackOfficeUser(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['backofficeUsers'] });
+    },
+  });
+};
+
+export const useDeleteBackOfficeUser = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteBackOfficeUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['backofficeUsers'] });
+    },
+  });
 };

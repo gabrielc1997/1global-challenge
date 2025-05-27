@@ -1,15 +1,15 @@
-export type BackOfficeUser = {
+export interface BackOfficeUser {
   id: number;
   email: string;
+  avatar: string;
   first_name: string;
   last_name: string;
-  avatar: string;
-};
+}
 
-export type BackOfficeUserResponse = {
-  page: number;
-  per_page: number;
-  total: number;
-  total_pages: number;
-  data: BackOfficeUser[];
-};
+export interface BackOfficeUserRequest {
+  id?: number;
+  email: string;
+  avatar?: string;
+  first_name: string;
+  last_name: string;
+}
