@@ -1,6 +1,7 @@
-import styled from 'styled-components';
-import AuthPanel from '@/components/organisms/AuthPanel';
-
+import styled from "styled-components";
+import AuthPanel from "@/components/organisms/AuthPanel";
+import ThemeToggleButton from "@/components/atoms/ThemeToggleButton";
+import { Stack, Box } from "@mui/material";
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.palette.background.default};
   min-height: 100vh;
@@ -20,10 +21,15 @@ const Container = styled.div`
 
 export default function AuthTemplate(props: any) {
   return (
-    <Wrapper>
-      <Container>
-        <AuthPanel {...props} />
-      </Container>
-    </Wrapper>
+    <>
+      <Box display="flex" justifyContent="flex-end" mb={4}>
+        <ThemeToggleButton />
+      </Box>
+      <Wrapper>
+        <Container>
+          <AuthPanel {...props} />
+        </Container>
+      </Wrapper>
+    </>
   );
 }
